@@ -15,7 +15,8 @@ const app = express();
 // with an immediately invoked function with the (app) argument.
 require("./routes/authRoutes")(app);
 
-const PORT = process.env.PORT;
-app.listen(PORT || 5000, console.log("Server is running on Port: 5000."));
+const PORT = process.env.PORT || 5000;
+const message = console.log("Server is running on Port: 5000.");
+app.listen(PORT, message);
 
 // localhost:5000
