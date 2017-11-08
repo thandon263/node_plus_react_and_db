@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
 const keys = require("./config/keys");
 // condense it down because we are not returning anything
 // cause it is not assigned to anything.
@@ -11,6 +13,21 @@ mongoose.connect(keys.mongoURI);
 
 // Instantiate the App by creating an Express engine
 const app = express();
+
+/***
+Use cookies to authenticate user
+Allowing permission and making Express handle
+Cookies on the go.
+- Tell passport to use cookies
+***/
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey]
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 // When we require an authRoutes file, it returns a function
 // with an immediately invoked function with the (app) argument.
