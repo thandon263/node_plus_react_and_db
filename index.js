@@ -46,8 +46,8 @@ var messages = () => {
   }
 };
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 const message = console.log(messages());
-app.listen(PORT, message);
+app.listen(PORT || 5000, message);
 
 // localhost:5000
